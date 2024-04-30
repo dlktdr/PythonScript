@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# FROM https://raw.githubusercontent.com/bruderstein/PythonScript/master/scripts/Samples/
 
 import re
 
@@ -54,19 +55,49 @@ import re
 #   - Modify the NAME of the file, containing the SEARCH and REPLACEMENT regexes
 #   - Indicate an ABSOLUTE or RELATIVE path, before the filename
 
-with open(r'SR_list.txt') as f: sr_list = f.readlines()
+#with open(r'SR_list.txt') as f: sr_list = f.readlines()
 
 # You may, as well, insert the SEARCH and REPLACE regexes, directly, in THIS script :
 
-#sr_list = [
-#    '!(?-s)(^.*?);.+!\\1!',
-#    '@(?-i)notepad\\+\\+@NOTEPAD++@',
-#    '&(Smith)|TEST|(James)&(?1Name)(?2First name)&',
-#    '%\\\\%   123   %',
-#          # or the syntax  '%\x5c\x5c%   123   %',
-#    '+(?i)Fix ++',
-#    '*###*\\\\\\\\\\\\*',
-#    ]
+sr_list = [
+r'!G90!G90 \(Absolute Programming\)!',
+r'!G40!G40 \(Kerf Off\)!',
+r'!G41!G41 \(Kerf Left\)!',
+r'!G42!G42 \(Kerf Right\)!',
+r'!G91!G91 \(Incremental Programming\)!',
+r'!G70!G70 \(Inch Mode\)!',
+r'!G84!G84 \(Deselect all Stations\)!',
+r'!G85\s?I(\d)(\d)\s?J(-?\d*.\d*)(\r|\n)!G85 I($1)($2) J($3) \(Fix St ($1), Move St ($2) Spacing=($3)\)!',
+r'!G83\s?I(\d)\s?(\r|\n)!G83 I($1)\(Select Station ($1)\)($2)!',
+r'!G83\s?I(\d)\s?J(\d)!G83 I($1) ($2)\(Select Station ($1) Clamp Mode=($2)\)!',
+r'!AL\s?(-?\d*.\d*)!AL ($1) \(Tilt to ($1) Degrees\)!',
+r'!(M178\s?D1)!($1) \(Send Y1 to Home\)!',
+r'!(M178\s?D2)!($1) \(Send Y2 to Home\)!',
+r'!G71!G71 \(Metric Mode\)!',
+r'!M65!M65 \(Plasma Start\)!',
+r'!M02!M02 \(Program Stop\)!',
+r'!M66!M66 \(Plasma Stop\)!',
+r'!M177!M177 \(Foot Up\)!',
+r'!M174!M174 \(Flying Stop\)!',
+r'!M176!M176 \(Foot Down\)!',
+r'!M35!M35 \(Rotation look ahead 1 block\)!',
+r'!M34!M34 \(Rotation skip block\)!',
+r'!M58!M58 \(AVHC Enable\)!',
+r'!M57!M57 \(AVHC Disable\)!',
+r'!M145 D0!M145 D0 \(Straight/I ORG Selection\)!',
+r'!M145 D1!M145 D1 \(Y ORG Selection\)!',
+r'!M145 D2!M145 D2 \(K ORG Selection\)!',
+r'!G160 P1!G160 P1 \(Plasma Process\)!',
+r'!G160 P2!G160 P2 \(Oxy-Fuel Process\)!',
+r'!M62!M62 \(Rotation Stop\Freeze\)!',
+r'!M63!M63 \(Rotation On\)!',
+r'!M64!M64 \(Rotation Off\)!',
+r'!D3(\r|\n)!D3 \(Comment Block Start\)($1)!',
+r'!D4(\r|\n)!D4 \(Comment Block End\)($1)!',
+r'!(M129 D(.\d)*)!($1) \(Total Material Thickness\)!',
+r'!(M120 D(.\d)*)!($1) \(Feature Height\)!',
+r'!(T\d)!($1) \(Tool Offset Select\)!'
+]
 
 # The use of RAW strings  r'.......'  is also possible, in order to SIMPLIFY some regexes
 
